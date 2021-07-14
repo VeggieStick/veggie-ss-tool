@@ -233,11 +233,6 @@ if %errorlevel%==0 goto vapev4
 
 
 
-findstr /b "00067f34842bc2c519a7ff3b88d2a574f4600000ffff" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 goto krypton
-
-
 findstr /b "https://cloudcheats.net/dashboard/" "%temp%\dumps\brave\brave*****.txt" >nul
 cls
 if %errorlevel%==0 goto generico
@@ -377,21 +372,6 @@ type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /
 timeout /t 10 /nobreak >nul 
 exit
 
-:krypton
-cls
-TASKKILL /F /IM dumper.exe
-cls
-del /f /q "%temp%\usn.txt" >nul
-del /f /q "%temp%\fart.exe" >nul
-RD /S /Q "%temp%\assets" >nul
-RD /S /Q "%temp%\dumps" >nul
-color 0C
-echo Found Krypton
-<"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
-echo Alts:
-type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-timeout /t 10 /nobreak >nul 
-exit
 
 
 
