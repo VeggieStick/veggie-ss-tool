@@ -131,7 +131,7 @@ findstr /b "0," < "%temp%\usn.txt" >%temp%\genc.txt
 if %errorlevel%==1 goto slinky
 if %errorlevel%==0 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\genc.txt) do echo %%L>%temp%\genc.txt
 echo Cloud Clicker (or any other garbage clicker/clients) was self destructed at: 
-type C:\Users\veggi\Desktop\VeggieSSTool\tset2\slink.txt
+type %temp%\genc.txt
 echo Would you like to continue the scan? (Yes, No)  
 set /p cont=
 if /i %cont%==Yes (goto slinkware) else (exit)
