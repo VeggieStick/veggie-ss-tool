@@ -134,7 +134,7 @@ echo Cloud Clicker (or any other garbage clicker/clients) was self destructed at
 type %temp%\genc.txt
 echo Would you like to continue the scan? (Yes, No)  
 set /p cont=
-if /i %cont%==Yes (goto slinkware) else (exit)
+if /i %cont%==Yes (goto slinky) else (exit)
 
 :slinky
 find "slinky.log" < "%temp%\usn.txt" >%temp%\slinky.txt
