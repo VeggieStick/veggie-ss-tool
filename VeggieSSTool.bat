@@ -46,7 +46,6 @@ curl -s https://pastebin.com/raw/JMqJgAgE > %temp%\colors.txt
 
 :Custom
 cls
-echo Enter Primary Color (Box)
 for /f "delims=" %%a in ('findstr /i /b "Primary" "%temp%\colors.txt"') do set custom1=%%a 
 if /i %custom1%==Primary:Green set c=%g%
 if /i %custom1%==Primary:Red set c=%r%
@@ -58,7 +57,6 @@ if /i %custom1%==Primary:Magenta set c=%m%
 
 :2Custom
 cls
-echo Enter Secondary Color (Text)
 for /f "delims=" %%a in ('findstr /i /b "Secondary" "%temp%\colors.txt"') do set custom2=%%a 
 if /i %custom2%==Secondary:Green set u=%g%
 if /i %custom2%==Secondary:Red set u=%r%
@@ -71,7 +69,6 @@ if /i %custom2%==Secondary:Magenta set u=%m%
 
 :3Custom
 cls
-echo Enter Tertiary Color (Numbers)
 for /f "delims=" %%a in ('findstr /i /b "Tertiary" "%temp%\colors.txt"') do set custom3=%%a 
 if /i %custom3%==Tertiary:Green set d=%g%
 if /i %custom3%==Tertiary:Red set d=%r%
