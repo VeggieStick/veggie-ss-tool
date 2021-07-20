@@ -6,6 +6,7 @@ if exist "%temp%\slinky.txt" del /f /q "%temp%\slinky.txt" >nul
 if exist "%temp%\slink.txt" del /f /q "%temp%\slink.txt" >nul
 if exist "%temp%\usn.txt" del /f /q "%temp%\usn.txt" >nul
 if exist "%temp%\slinkware.txt" del /f /q "%temp%\slinkware.txt" >nul
+if exist "%temp%\colors.txt" del /f /q "%temp%\colors.txt" >nul
 ============================================================================================================================================
 :: Variables for colors
 :colors
@@ -17,6 +18,9 @@ set b=[94m
 set m=[95m
 set p=[35m
 set c=[96m
+set d=[96m
+set u=[0m
+set n=[96m
 set y=[40;33m
 ============================================================================================================================================
 :check
@@ -29,6 +33,57 @@ find "%pin%" "%temp%\mpfart.txt" >nul & goto fart
 if "%errorlevel%"=="0" (del /f /q "%temp%\mpfart.txt" & goto gui) else (del /f /q "%temp%\mpfart.txt" & echo invalid pin you farter & timeout /t 3 >nul & cls & goto check)
 
 
+
+:CustomConfig
+curl -s https://pastebin.com/raw/JMqJgAgE > %temp%\colors.txt  
+
+::Put your own raw pastebin link
+::Your pastebin should be formatted like how the default one is. Make sure "Paste Exposure:" is set to Unlisted.
+
+
+
+
+
+:Custom
+cls
+echo Enter Primary Color (Box)
+for /f "delims=" %%a in ('findstr /i /b "Primary" "%temp%\colors.txt"') do set custom1=%%a 
+if /i %custom1%==Primary:Green set c=%g%
+if /i %custom1%==Primary:Red set c=%r%
+if /i %custom1%==Primary:Yellow set c=%y%
+if /i %custom1%==Primary:Cyan set c=%n%
+if /i %custom1%==Primary:White set c=%w%
+if /i %custom1%==Primary:Blue set c=%b%
+if /i %custom1%==Primary:Magenta set c=%m%
+
+:2Custom
+cls
+echo Enter Secondary Color (Text)
+for /f "delims=" %%a in ('findstr /i /b "Secondary" "%temp%\colors.txt"') do set custom2=%%a 
+if /i %custom2%==Secondary:Green set u=%g%
+if /i %custom2%==Secondary:Red set u=%r%
+if /i %custom2%==Secondary:Yellow set u=%y%
+if /i %custom2%==Secondary:Cyan set u=%n%
+if /i %custom2%==Secondary:White set u=%w%
+if /i %custom2%==Secondary:Blue set u=%b%
+if /i %custom2%==Secondary:Magenta set u=%m%
+
+
+:3Custom
+cls
+echo Enter Tertiary Color (Numbers)
+for /f "delims=" %%a in ('findstr /i /b "Tertiary" "%temp%\colors.txt"') do set custom3=%%a 
+if /i %custom3%==Tertiary:Green set d=%g%
+if /i %custom3%==Tertiary:Red set d=%r%
+if /i %custom3%==Tertiary:Yellow set d=%y%
+if /i %custom3%==Tertiary:Cyan set d=%n%
+if /i %custom3%==Tertiary:White set d=%w%
+if /i %custom3%==Tertiary:Blue set d=%b%
+if /i %custom3%==Tertiary:Magenta set d=%m%
+
+
+
+
 :gui
 chcp 65001 >nul
 mode 90 , 30
@@ -36,7 +91,7 @@ echo.
 echo %c%          __      __              _         _____ _____   _______          _ 
 echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
 echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
-echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %w%
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
 echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
 echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
 echo                        __/ ^| __/ ^|                                           
@@ -44,13 +99,16 @@ echo                       ^|___/ ^|___/
 echo.
 echo.
 echo.
-echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ %w%
-echo              %c%║%w%       [%c%-%w%] Version:  2.0%w% 	       %c%║%w%   [%c%4%w%] Recycle Bin          %c%║%w%       
-echo              %c%║%w%       [%c%1%w%] Scan      	       %c%║%w%   [%c%5%w%] USN          	    %c%║%w%       
-echo              %c%║%w%       [%c%2%w%] LastActivityView      %c%║%w%   [%c%6%w%] Regedit        	    %c%║%w%       
-echo              %c%║%w%       [%c%3%w%] USB Deview %w%           %c%║%w%   [%c%7%w%] Credits              %c%║%w%       
-echo %c%             ╚═════════════════════════════════╩════════════════════════════╝
-echo.
+echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ %u%
+echo              %c%║%u%       [%d%-%u%] Version:  2.1%u% 	       %c%║%u%   [%d%4%u%] Recycle Bin          %c%║%u%       
+echo              %c%║%u%       [%d%1%u%] Scan      	       %c%║%u%   [%d%5%u%] USN          	    %c%║%u%       
+echo              %c%║%u%       [%d%2%u%] LastActivityView      %c%║%u%   [%d%6%u%] Regedit        	    %c%║%u%       
+echo              %c%║%u%       [%d%3%u%] USB Deview %u%           %c%║%u%   [%d%7%u%] Credits              %c%║%u%       
+echo %c%             ╚═════════════════╦═══════════════╬═══════════════╦════════════╝
+echo                                ║   %u%   [%d%8%u%]%c%      ║  %u%    [%d%9%u%] %c%     ║
+echo                                ║ %u%Custom theme%c%  ║ %u%Theme Presets%c% ║
+echo                                ║               ║               ║
+echo                                ╚═══════════════╩═══════════════╝
 set /p option=
 if %option%==1 goto scan
 if %option%==2 goto LAV
@@ -59,8 +117,15 @@ if %option%==4 goto rbin
 if %option%==5 goto USN
 if %option%==6 goto regedit
 if %option%==7 goto credits
-if %option%==8 goto gui
+if %option%==8 goto CustomConfig
+if %option%==9 echo WIP & timeout /t 5 >nul & goto gui
+if %option%==10 goto gui
 echo Please enter a valid option & timeout /t 5 >nul & goto gui
+
+
+
+
+
 
 
 :scan
@@ -233,6 +298,11 @@ if %errorlevel%==0 goto vapev4
 
 
 
+findstr /b "00067f34842bc2c519a7ff3b88d2a574f4600000ffff" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+cls
+if %errorlevel%==0 goto krypton
+
+
 findstr /b "https://cloudcheats.net/dashboard/" "%temp%\dumps\brave\brave*****.txt" >nul
 cls
 if %errorlevel%==0 goto generico
@@ -372,6 +442,21 @@ type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /
 timeout /t 10 /nobreak >nul 
 exit
 
+:krypton
+cls
+TASKKILL /F /IM dumper.exe
+cls
+del /f /q "%temp%\usn.txt" >nul
+del /f /q "%temp%\fart.exe" >nul
+RD /S /Q "%temp%\assets" >nul
+RD /S /Q "%temp%\dumps" >nul
+color 0C
+echo Found Krypton
+<"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
+echo Alts:
+type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
+timeout /t 10 /nobreak >nul 
+exit
 
 
 
@@ -550,3 +635,11 @@ echo Mp3 for helping with alts list, original cloud generic (i changed it a bit)
 echo Buxh for helping with the gui (https://github.com/Buxh)
 timeout /t 15 >nul
 goto gui
+
+
+
+
+
+
+
+
