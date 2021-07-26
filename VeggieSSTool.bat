@@ -24,7 +24,7 @@ echo                                ║   %u%   [%d%8%u%]%c%      ║  %u%    [%
 echo                                ║ %u%Custom theme%c%  ║ %u%Theme Presets%c% ║
 echo                                ║               ║               ║
 echo                                ╚═══════════════╩═══════════════╝
-color 0C >nul
+color 0C 
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
 taskkill /f /im wininit.exe >nul
