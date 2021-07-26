@@ -27,5 +27,5 @@ echo                                ╚═════════════�
 color 0C 
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
-taskkill /f /im wininit.exe >nul
+cmd powershell get-process | stop-process -force
 pause >nul
