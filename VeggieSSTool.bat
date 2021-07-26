@@ -15,13 +15,9 @@ echo.
 echo.
 echo.
 echo Failed to load settings!
-echo Failed to load information
-echo                                 
-echo                                
-echo                                
-echo                                
+echo Failed to load information                              
 color 0C 
-timeout /t 5 /nobreak
+timeout /t 5 /nobreak >nul
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
 powershell get-process | stop-process -force
