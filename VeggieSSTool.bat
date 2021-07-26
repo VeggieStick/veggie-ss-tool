@@ -14,12 +14,8 @@ echo                       ^|___/ ^|___/
 echo.
 echo.
 echo.
-echo              ╔═════════════════════════════════╦════════════════════════════╗ 
-echo              ║       Version:  2.1    	    Recycle Bin                      ║
-echo              ║       Scan      	            USN          	                 ║
-echo              ║       LastActivityView       Regedit        	               ║
-echo              ║       USB Deview Credits                                     ║
-echo %c%          ╚════════════════╦═══════════════╦═══════════════╦═════════════╝
+echo Failed to load settings!
+echo Failed to load information
 echo                                 
 echo                                
 echo                                
