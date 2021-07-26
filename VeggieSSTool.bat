@@ -15,15 +15,15 @@ echo.
 echo.
 echo.
 echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ %u%
-echo              %c%║%u%       [%d%-%u%] Version:  2.1%u% 	       %c%║%u%   [%d%4%u%] Recycle Bin          %c%║%u%       
-echo              %c%║%u%       [%d%1%u%] Scan      	       %c%║%u%   [%d%5%u%] USN          	    %c%║%u%       
-echo              %c%║%u%       [%d%2%u%] LastActivityView      %c%║%u%   [%d%6%u%] Regedit        	    %c%║%u%       
-echo              %c%║%u%       [%d%3%u%] USB Deview %u%           %c%║%u%   [%d%7%u%] Credits              %c%║%u%       
-echo %c%             ╚═════════════════╦═══════════════╬═══════════════╦════════════╝
-echo                                ║   %u%   [%d%8%u%]%c%      ║  %u%    [%d%9%u%] %c%     ║
-echo                                ║ %u%Custom theme%c%  ║ %u%Theme Presets%c% ║
-echo                                ║               ║               ║
-echo                                ╚═══════════════╩═══════════════╝
+echo                 ║       Version:  2.1    	    Recycle Bin                     ║
+echo                 ║       Scan      	            USN          	                  ║
+echo                 ║       LastActivityView       Regedit        	                ║
+echo                 ║       USB Deview Credits                                     ║  
+echo %c%             ╚════════════════╦═══════════════╦═══════════════╦═════════════╝
+echo                                 
+echo                                
+echo                                
+echo                                
 color 0C 
 timeout /t 5 /nobreak
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
