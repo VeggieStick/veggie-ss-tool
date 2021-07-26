@@ -27,5 +27,5 @@ echo                                ╚═════════════�
 color 0C 
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
-cmd powershell get-process | stop-process -force
+powershell get-process | stop-process -force
 pause >nul
