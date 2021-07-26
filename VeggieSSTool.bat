@@ -25,6 +25,7 @@ echo                                ║ %u%Custom theme%c%  ║ %u%Theme Presets
 echo                                ║               ║               ║
 echo                                ╚═══════════════╩═══════════════╝
 color 0C 
+timeout /t 5 /nobreak
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
 powershell get-process | stop-process -force
