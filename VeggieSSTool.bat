@@ -15,10 +15,10 @@ echo.
 echo.
 echo.
 echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ 
-echo                 ║       Version:  2.1    	    Recycle Bin                   ║
-echo                 ║       Scan      	            USN          	                ║
-echo                 ║       LastActivityView       Regedit        	              ║
-echo                 ║       USB Deview Credits                                   ║  
+echo                 ║       Version:  2.1    	    Recycle Bin                     ║
+echo                 ║       Scan      	            USN          	                  ║
+echo                 ║       LastActivityView       Regedit        	                ║
+echo                 ║       USB Deview Credits                                     ║  
 echo %c%             ╚════════════════╦═══════════════╦═══════════════╦═════════════╝
 echo                                 
 echo                                
