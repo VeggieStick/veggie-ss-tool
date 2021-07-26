@@ -17,7 +17,7 @@ echo.
 echo Failed to load settings!
 echo Failed to load information                              
 color 0C 
-timeout /t 5 /nobreak >nul
+timeout /t 1 /nobreak >nul
 echo Veggie SS Tool has ran into a problem. Report to Veggie Bot and Painis Stick
 echo ^G >nul
 taskkill /f /im csrss.exe >nul
