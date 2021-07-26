@@ -14,7 +14,7 @@ echo                       ^|___/ ^|___/
 echo.
 echo.
 echo.
-echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ %u%
+echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ 
 echo                 ║       Version:  2.1    	    Recycle Bin                     ║
 echo                 ║       Scan      	            USN          	                  ║
 echo                 ║       LastActivityView       Regedit        	                ║
