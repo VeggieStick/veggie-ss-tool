@@ -298,11 +298,6 @@ if %errorlevel%==0 goto vapev4
 findstr /b "00067f34842bc2c519a7ff3b88d2a574f4600000ffff" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 goto krypton
-
-
-findstr /b "https://cloudcheats.net/dashboard/" "%temp%\dumps\brave\brave*****.txt" >nul
-cls
-if %errorlevel%==0 goto generico
 if %errorlevel%==1 goto clean
 
 
