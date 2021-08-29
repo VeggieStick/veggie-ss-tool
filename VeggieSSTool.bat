@@ -350,13 +350,9 @@ findstr /b "000658c84c61a0df84027fe32e02a9c0b1e900000000" "%temp%\dumps\svchost\
 cls
 if %errorlevel%==0 echo Found Axenta Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000C7600" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0000e8942af285a9792b38e7cb5f711d27e59b2319c6" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Axenta Clicker V2 (1)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0xbd7cba1c" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found Axenta Clicker V2 (2)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x00000000000D2800" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
