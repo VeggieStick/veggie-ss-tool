@@ -297,11 +297,31 @@ curl -s https://cdn.discordapp.com/attachments/862110537622355981/86458460154861
 if not exist "%temp%\fart.exe" echo an error has fartcured & timeout /t 3 /nobreak >nul & exit /b
 cd %temp%
 "fart.exe"
-::the timeout is so that javaw can finish dumping
-timeout /t 10 /nobreak >nul
-TASKKILL /F /IM dumper.exe >nul
 
-set detected=false
+
+
+find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
+findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
+if %errorlevel%==0 FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\pref2.txt) do set mgexe=%%H
+del /f /q "%temp%\pref2.txt" >nul
+del /f /q "%temp%\pref.txt" >nul
+
+find "AppCrash_" < "%temp%\usn.txt" >%temp%\ustestm.txt
+for /F "tokens=1,2 delims=_" %%I in (%temp%\ustestm.txt) do ( set mgexe2=%%J)
+FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm.txt) do set sdtime=%%L 
+if %errorlevel%==0 goto mgc
+
+
+:mgc
+del /f /q "%temp%\ustestm.txt" >nul
+if /i %mgexe%==%mgexe2% (echo Generic Cheat Found: %mgexe2%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
+
+timeout /t 10 /nobreak >nul
+
+
+
+:fstrings
+TASKKILL /F /IM dumper.exe >nul
 findstr /b /C:"lunar/dE/IlIlIIIlllIlIlIIlllllllllB" "%temp%\dumps\javaw\javaw**.txt" >nul
 cls
 if %errorlevel%==0 set lunar=true
@@ -350,9 +370,21 @@ findstr /b "000658c84c61a0df84027fe32e02a9c0b1e900000000" "%temp%\dumps\svchost\
 cls
 if %errorlevel%==0 echo Found Axenta Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0000e8942af285a9792b38e7cb5f711d27e59b2319c6" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0x00000000000C7600" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Axenta Clicker V2 (1)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0xbd7cba1c" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+cls
+if %errorlevel%==0 echo Found Axenta Clicker V2 (2)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "000000cc4b2f6ba90bf6fa96c0a72ad200eef3f9d12d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+cls
+if %errorlevel%==0 echo Found BhopMC Clicker(1)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0006bc39c3f8143dbeff6864366a802be50500000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+cls
+if %errorlevel%==0 echo Found BhopMC Clicker>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x00000000000D2800" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
@@ -435,13 +467,21 @@ findstr /b "0x000000000071CE10" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Lithium>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0x00000000000ECC00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Mango Clicker(1)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x1bdc00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x1bdc00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+cls
+if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x1c2000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+cls
+if %errorlevel%==0 echo Found Mango Clicker(4)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
