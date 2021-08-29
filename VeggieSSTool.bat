@@ -303,18 +303,21 @@ cd %temp%
 find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
 findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
 if %errorlevel%==0 FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\pref2.txt) do set mgexe=%%H
+FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\pref2.txt) do set sdtime=%%L 
 del /f /q "%temp%\pref2.txt" >nul
-del /f /q "%temp%\pref.txt" >nul
 
-find "AppCrash_" < "%temp%\usn.txt" >%temp%\ustestm.txt
-for /F "tokens=1,2 delims=_" %%I in (%temp%\ustestm.txt) do ( set mgexe2=%%J)
-FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm.txt) do set sdtime=%%L 
+
+find "REG.EXE-" < "%temp%\pref.txt" >%temp%\ustestm.txt
+del /f /q "%temp%\pref.txt" >nul
+findstr /v /c:"Data extend" "%temp%\ustestm.txt" >> "%temp%\ustestm2.txt"
+FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm2.txt) do set sdtime2=%%L 
 if %errorlevel%==0 goto mgc
 
 
 :mgc
 del /f /q "%temp%\ustestm.txt" >nul
-if /i %mgexe%==%mgexe2% (echo Generic Cheat Found: %mgexe2%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
+del /f /q "%temp%\ustestm2.txt" >nul
+if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
 
 timeout /t 10 /nobreak >nul
 
