@@ -256,6 +256,7 @@ del /f /Q "%temp%\v2.txt"
 find "WMIC.EXE-" < "%temp%\usn.txt" >%temp%\void.txt
 if %errorlevel%==1 goto jnativehook
 if %errorlevel%==0 findstr /v /c:"Data extend" "%temp%\void.txt" | findstr /v /c:"Security change" | findstr /v /c:"File delete" | findstr /v /c:"File create" >> "%temp%\v2.txt"
+if %errorlevel%==1 goto jnativehook
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\v2.txt) do set voidtime2=%%L 
 del /f /Q "%temp%\v2.txt"
 if %voidtime%==%voidtime2% (goto void2) else (goto jnativehook)
@@ -470,21 +471,17 @@ findstr /b "0x000000000071CE10" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Lithium>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000ECC00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Mango Clicker(1)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0x1bdc00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x1bdc00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
-
 findstr /b "0x1c2000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
-if %errorlevel%==0 echo Found Mango Clicker(4)>>"%temp%\detected.txt" & set detected=true
+if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
