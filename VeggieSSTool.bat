@@ -358,14 +358,6 @@ findstr /b "0xbd7cba1c" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Axenta Clicker V2 (2)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000000cc4b2f6ba90bf6fa96c0a72ad200eef3f9d12d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found BhopMC Clicker(1)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0006bc39c3f8143dbeff6864366a802be50500000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found BhopMC Clicker>>"%temp%\detected.txt" & set detected=true
-
 findstr /b "0x00000000000D2800" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Boris Clicker>>"%temp%\detected.txt" & set detected=true
@@ -447,21 +439,13 @@ findstr /b "0x000000000071CE10" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Lithium>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000ECC00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
+findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
 if %errorlevel%==0 echo Found Mango Clicker(1)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
-
 findstr /b "0x1bdc00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
-if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0x1c2000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found Mango Clicker(4)>>"%temp%\detected.txt" & set detected=true
+if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
 cls
