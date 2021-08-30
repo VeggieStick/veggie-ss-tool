@@ -2,8 +2,9 @@
 if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 
 
-if exist "%temp%\assets" RD /S /Q "%temp%\assets" >nul
-if exist "%temp%\dumps" RD /S /Q "%temp%\dumps" >nul
+if exist "%temp%\javaw.txt" del /f /q "%temp%\javaw.txt" >nul
+if exist "%temp%\diagtrack.txt" del /f /q "%temp%\diagtrack.txt" >nul
+if exist "%temp%\pcasvc.txt" del /f /q "%temp%\pcasvc.txt" >nul
 if exist "%temp%\slinky.txt" del /f /q "%temp%\slinky.txt" >nul
 if exist "%temp%\slink.txt" del /f /q "%temp%\slink.txt" >nul
 if exist "%temp%\usn.txt" del /f /q "%temp%\usn.txt" >nul
@@ -17,8 +18,8 @@ if exist "%temp%\colors.txt" del /f /q "%temp%\colors.txt" >nul
 ============================================================================================================================================
 :: Variables for colors
 :colors
-set g=[0;32m
-set r=[0;31m
+set g=[92m
+set r=[91m
 set l=[1m
 set w=[0m
 set b=[94m
@@ -27,8 +28,12 @@ set p=[35m
 set c=[96m
 set d=[96m
 set u=[0m
+set z=[91m
 set n=[96m
 set y=[40;33m
+set g2=[102m
+set r2=[101m
+set t=[40m
 ============================================================================================================================================
 
 
@@ -119,7 +124,7 @@ echo.
 echo.
 echo.
 echo %c%             ╔═════════════════════════════════╦════════════════════════════╗ %u%
-echo              %c%║%u%       [%d%-%u%] Version:  2.1%u% 	       %c%║%u%   [%d%4%u%] Recycle Bin          %c%║%u%       
+echo              %c%║%u%       [%d%-%u%] Version:  2.3%u% 	       %c%║%u%   [%d%4%u%] Recycle Bin          %c%║%u%       
 echo              %c%║%u%       [%d%1%u%] Scan      	       %c%║%u%   [%d%5%u%] USN          	    %c%║%u%       
 echo              %c%║%u%       [%d%2%u%] LastActivityView      %c%║%u%   [%d%6%u%] Regedit        	    %c%║%u%       
 echo              %c%║%u%       [%d%3%u%] USB Deview %u%           %c%║%u%   [%d%7%u%] Credits              %c%║%u%       
@@ -206,28 +211,60 @@ cd %temp%
 if exist "%temp%\assets" RD /S /Q "%temp%\assets" >nul
 if exist "%temp%\dumps" RD /S /Q "%temp%\dumps" >nul
 cls
-echo Scanning....
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%.%r%%r2%...................%t%%w%
 :cloud_generic
 if exist "%temp%\genc" del /f /q "%temp%\genc" >nul
 fsutil usn readJournal C: csv > "%temp%\usn.txt"
 if not exist "%temp%\usn.txt" goto error
+cls 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%..%r%%r2%..................%t%%w%
 findstr /b "0," < "%temp%\usn.txt" >%temp%\genc.txt
 if %errorlevel%==1 goto slinky
-if %errorlevel%==0 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\genc.txt) do echo %%L>%temp%\genc.txt
-echo Cloud Clicker (or any other garbage clicker/clients) was self destructed at: 
-type %temp%\genc.txt
+if %errorlevel%==0 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\genc.txt) do set genc=%%L
+echo Cloud Clicker (or any other garbage clicker/clients) was self destructed at: %genc%
 echo Would you like to continue the scan? (Yes, No)  
 set /p cont=
 if /i %cont%==Yes (goto slinky) else (exit)
 
 :slinky
 find "slinky.log" < "%temp%\usn.txt" >%temp%\slinky.txt
+cls 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%...%r%%r2%.................%t%%w%
 if %errorlevel%==1 goto slinkware
 if %errorlevel%==0 FOR /F "tokens=6 delims=," %%G IN (%temp%\slinky.txt) do findstr /v /c:"File delete" "%temp%\slinky.txt" >> "%temp%\slink.txt"
 findstr /v /c:"Security change" "%temp%\slinky.txt" >> "%temp%\slink.txt"
-FOR /F "tokens=6 delims=," %%G IN (%temp%\slink.txt) do echo %%G>%temp%\slink.txt
-echo Slinky was closed at: 
-type %temp%\slink.txt
+FOR /F "tokens=6 delims=," %%G IN (%temp%\slink.txt) do set slink=%%G
+echo Slinky was closed at: %slink%
 echo Would you like to continue the scan? (Yes, No)  
 set /p cont=
 if /i %cont%==Yes (goto pshistory) else (exit)
@@ -240,17 +277,40 @@ if /i %cont%==Yes (goto pshistory) else (exit)
 
 :pshistory
 cls
-echo Scanning..
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%....%r%%r2%................%t%%w%
 findstr /b /i "help" "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
-if not exist "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt" goto strings
+if not exist "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt" goto void
 if %errorlevel%==0 goto genericl
 if %errorlevel%==1 goto void
 
 
 :void
 find "f01b4d95cf55d32a.automaticDestinations-ms" < "%temp%\usn.txt" >%temp%\void.txt
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%.....%r%%r2%...............%t%%w%
 if %errorlevel%==1 goto jnativehook 
 if %errorlevel%==0 findstr /v /c:"File create" "%temp%\void.txt" | findstr /v /c:"Data extend" | findstr /v /c:"Data overwrite" >> "%temp%\v2.txt"
+if %errorlevel%==1 goto jnativehook
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\v2.txt) do set voidtime=%%L
 del /f /Q "%temp%\v2.txt"
 find "WMIC.EXE-" < "%temp%\usn.txt" >%temp%\void.txt
@@ -276,6 +336,18 @@ if %errorlevel%==1 cls & goto jnative2
 
 :jnative2
 find "JNativeHook" < "%temp%\usn.txt" | find "delete" >%temp%\jna.txt
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                %g%%g2%......%r%%r2%..............%t%%w%
 if %errorlevel%==1 goto strings
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\jna.txt) do set jnativetime=%%L
 echo A JNativeHook was deleted at: %jnativetime%
@@ -294,12 +366,83 @@ if /i %cont%==Yes (goto strings) else (goto gui)
 
 chcp 437 >nul
 cls
-curl -s https://cdn.discordapp.com/attachments/862110537622355981/864584601548619776/Process_Dumper.exe > %temp%\fart.exe
-if not exist "%temp%\fart.exe" echo an error has fartcured & timeout /t 3 /nobreak >nul & exit /b
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%.......%r%%r2%.............%t%%w%
+curl -s https://cdn.discordapp.com/attachments/876545074387910726/881681561685205042/strings2.exe > %temp%\dumper.exe
+if not exist "%temp%\dumper.exe" echo an error has fartcured & timeout /t 3 /nobreak >nul & exit /b
+tasklist /svc | find "svchost.exe" > %temp%\svchost.txt
+find "Pca" < "%temp%\svchost.txt" > %temp%\pcasvc.txt
+if %errorlevel%==1 echo PcaSvc not Found, this might limit detections. & pause
+FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\pcasvc.txt) do set pcasvc=%%H 
+del /f /q "%temp%\pcasvc.txt"
+find "Diag" < "%temp%\svchost.txt" > %temp%\diag.txt
+if %errorlevel%==1 echo DiagTrack not Found, this might limit detections. & pause
+FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\diag.txt) do set diagtrack=%%H
+del /f /q "%temp%\diag.txt" 
+tasklist | find "javaw" > %temp%\javaw.txt
+FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\javaw.txt) do set javaw=%%H
+del /f /q "%temp%\javaw.txt"
 cd %temp%
-"fart.exe"
-
-
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%........%g%%g2%............%t%%w%
+dumper.exe -pid %pcasvc% -l 4 > %temp%\pcasvc.txt
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%.........%r%%r2%...........%t%%w%
+dumper.exe -pid %diagtrack% -l 4 > %temp%\diagtrack.txt
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%..........%r%%r2%..........%t%%w%
+dumper.exe -pid %javaw% -l 4 > %temp%\javaw.txt
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%...............%r%%r2%.....%t%%w%
 
 find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
 findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
@@ -316,215 +459,202 @@ if %errorlevel%==0 goto mgc
 
 
 :mgc
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%................%r%%r2%....%t%%w%
 del /f /q "%temp%\ustestm.txt" >nul
 del /f /q "%temp%\ustestm2.txt" >nul
 if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
 
-timeout /t 10 /nobreak >nul
 
 
 
 :fstrings
-TASKKILL /F /IM dumper.exe >nul
-findstr /b /C:"lunar/dE/IlIlIIIlllIlIlIIlllllllllB" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /b /C:"lunar/dE/IlIlIIIlllIlIlIIlllllllllB" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 set lunar=true
 
-findstr /i /b /C:"Auto Clicker" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /i /b /C:"Auto Clicker" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic A>>"%temp%\detected.txt" & set detected=true
 
-findstr /b /C:"Secondary finalizer" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /b /C:"Secondary finalizer" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 goto GenericSD
 
-findstr ".jar!/trumpclientftw_bape_ggbP.class" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /c:".jar!/trumpclientftw_bape_ggbP.class" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Bape (Cracked Vape)>>"%temp%\detected.txt" & set detected=true
 
-findstr ".jar!/g/a/p/u/l/b.class" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /c:".jar!/g/a/p/u/l/b.class" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Ghostsense>>"%temp%\detected.txt" & set detected=true
 
-findstr ".jar!/Hamdulilha/" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /c:".jar!/Hamdulilha/" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Lowkey>>"%temp%\detected.txt" & set detected=true
  
-findstr /b "skilleddablol" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /b "skilleddablol" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Skilled>>"%temp%\detected.txt" & set detected=true
 
-
+findstr /i /c:"/keystrokesmod/ah$DM.class" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Raven>>"%temp%\detected.txt" & set detected=true
 
 :continue
 
-findstr /b "(DDDDLjava/awt/color;)V" "%temp%\dumps\javaw\javaw**.txt" >nul
-cls
+findstr /b "(DDDDLjava/awt/color;)V" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Vape V4>>"%temp%\detected.txt" & set detected=true
 
-
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%.................%r%%r2%...%t%%w%
 
 :pcasvc
 
-findstr /b "0000ceea51f8440281c20c0ac8a03ae02e95c173ee84" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0000ceea51f8440281c20c0ac8a03ae02e95c173ee84" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Air Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000658c84c61a0df84027fe32e02a9c0b1e900000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "000658c84c61a0df84027fe32e02a9c0b1e900000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Axenta Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000C7600" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000000C7600" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Axenta Clicker V2 (1)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0xbd7cba1c" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0xbd7cba1c" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Axenta Clicker V2 (2)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000000cc4b2f6ba90bf6fa96c0a72ad200eef3f9d12d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "000000cc4b2f6ba90bf6fa96c0a72ad200eef3f9d12d" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found BhopMC Clicker(1)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0006bc39c3f8143dbeff6864366a802be50500000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0006bc39c3f8143dbeff6864366a802be50500000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found BhopMC Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000D2800" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000000D2800" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Boris Clicker>>"%temp%\detected.txt" & set detected=true
 ::sorry boris ily :sob:
 
-findstr /b "0006c14d60326bbbe5449f0b7449da452de900000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
-if %errorlevel%==0 echo Found Chronic Clicker>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0000a476be755207b0a789a7ea291980ddc53318ff1d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0000a476be755207b0a789a7ea291980ddc53318ff1d" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Client Loader>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x19ac000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x19ac000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Cracked Crypt>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "00006f93f72e4b4b1219e0fe9b18192fd67b43666460" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "00006f93f72e4b4b1219e0fe9b18192fd67b43666460" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Encephalon>>"%temp%\detected.txt" & set detected=true
  
-findstr /b "0x00000000004D9400" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000004D9400" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Encephalon>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0006ecfb83cbfb17d534d572dfbda503e2da0000ffff" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0006ecfb83cbfb17d534d572dfbda503e2da0000ffff" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Epic External>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0000ed6212e71335f3707303da91c84993c149520d01" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0000ed6212e71335f3707303da91c84993c149520d01" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Epic External>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000072a0261e826a498eba2acf10b5b49400c5657f53" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "000072a0261e826a498eba2acf10b5b49400c5657f53" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Glock Clicker Crack>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000637aa5385f0e2f927e4ea540422e5224900000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "000637aa5385f0e2f927e4ea540422e5224900000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Glock Clicker Cracked>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000001F2800" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000001F2800" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Hermotet>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x2527f802" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x2527f802" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Hermotet>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000A0E00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000000A0E00" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Hyper Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0000cc666a1ffe5984bf91082f2f09d4c8c202347ea2" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0000cc666a1ffe5984bf91082f2f09d4c8c202347ea2" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Hyper Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x000000000006B800" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x000000000006B800" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Itami>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "00004c2e07fa16364ba09ae6bcff09d00beafe1ab889" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "00004c2e07fa16364ba09ae6bcff09d00beafe1ab889" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Koid>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x000000000017D200" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x000000000017D200" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Koid>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x17d200" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x17d200" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Koid>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000003D7010" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000003D7010" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Krypton>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x000000000071CE10" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x000000000071CE10" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Lithium>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x970c21e9" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x00000000000ECC00" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mango Clicker(1)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x1bdc00" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x970c21e9" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x1c2000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x1bdc00" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0x1c2000" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Mango Clicker(4)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mango Lite>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "00066c65787f14c3e9200e0c7a54b343a2b100000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "00066c65787f14c3e9200e0c7a54b343a2b100000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mangoo Lite>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0006e1e8596a5009096d3041f00930c2dff50000ffff" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0006e1e8596a5009096d3041f00930c2dff50000ffff" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Nova Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000639a5f0816c6b9268e951750094e763fe00000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "000639a5f0816c6b9268e951750094e763fe00000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Peach Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0000f136e2be3d29c97c29c54d2d4b4225477cdb2669" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0000f136e2be3d29c97c29c54d2d4b4225477cdb2669" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Slinkware>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0006966215a9cce0d8555692dc19b932389400000000" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "0006966215a9cce0d8555692dc19b932389400000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "00002d1772f38cfe4bbcdec8f055a44cb17bf3702081" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "00002d1772f38cfe4bbcdec8f055a44cb17bf3702081" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000671877ff7d96b7584206a5bb10417fcd00000ffff" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "000671877ff7d96b7584206a5bb10417fcd00000ffff" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Zoomin>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "00006ecc49dd6ea7b641a641f5f9a260483a21fd6350" "%temp%\dumps\svchost\PcaSvc\Pca**.txt" >nul
-cls
+findstr /b "00006ecc49dd6ea7b641a641f5f9a260483a21fd6350" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Zoomin>>"%temp%\detected.txt" & set detected=true
 
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                    %g%%g2%..................%r%%r2%..%t%%w%
 
 :diagtrack
 
 
-findstr /b /C:"cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q" "%temp%\dumps\svchost\DiagTrack\DiagTrack**.txt" >nul
-cls
+findstr /b /C:"cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q" "%temp%\diagtrack.txt" >nul
 if %errorlevel%==0 echo Found Generic External SelfDestruct>>"%temp%\detected.txt" & set detected=true
 if %detected%==true (goto dtc) else (goto clean)
 
@@ -539,7 +669,6 @@ if %detected%==true (goto dtc) else (goto clean)
 
 
 :clean
-TASKKILL /F /IM dumper.exe >nul
 cls
 color 0A
 echo Clean
@@ -551,7 +680,6 @@ exit
 
 
 :dtc
-TASKKILL /F /IM dumper.exe >nul
 cls
 color 0C
 type "%temp%\detected.txt"
