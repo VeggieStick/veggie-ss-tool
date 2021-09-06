@@ -1,7 +1,8 @@
 @echo off & title Veggie SS Tool
 if not "%1"=="am_admin" (powershell start -verb runas '%0' am_admin & exit /b)
 
-
+set detected=false
+set lun=false
 if exist "%temp%\javaw.txt" del /f /q "%temp%\javaw.txt" >nul
 if exist "%temp%\diagtrack.txt" del /f /q "%temp%\diagtrack.txt" >nul
 if exist "%temp%\pcasvc.txt" del /f /q "%temp%\pcasvc.txt" >nul
@@ -215,12 +216,19 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo %w%                                             5 
 echo                                    %g%%g2%.%r%%r2%...................%t%%w%
 :cloud_generic
 if exist "%temp%\genc" del /f /q "%temp%\genc" >nul
@@ -231,12 +239,19 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             10
 echo                                    %g%%g2%..%r%%r2%..................%t%%w%
 findstr /b "0," < "%temp%\usn.txt" >%temp%\genc.txt
 if %errorlevel%==1 goto slinky
@@ -253,12 +268,19 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             15
 echo                                    %g%%g2%...%r%%r2%.................%t%%w%
 if %errorlevel%==1 goto slinkware
 if %errorlevel%==0 FOR /F "tokens=6 delims=," %%G IN (%temp%\slinky.txt) do findstr /v /c:"File delete" "%temp%\slinky.txt" >> "%temp%\slink.txt"
@@ -281,12 +303,19 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             20
 echo                                    %g%%g2%....%r%%r2%................%t%%w%
 findstr /b /i "help" "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 if not exist "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt" goto void
@@ -296,23 +325,30 @@ if %errorlevel%==1 goto void
 
 :void
 find "f01b4d95cf55d32a.automaticDestinations-ms" < "%temp%\usn.txt" >%temp%\void.txt
-cls
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo                                    %g%%g2%.....%r%%r2%...............%t%%w%
 if %errorlevel%==1 goto jnativehook 
 if %errorlevel%==0 findstr /v /c:"File create" "%temp%\void.txt" | findstr /v /c:"Data extend" | findstr /v /c:"Data overwrite" >> "%temp%\v2.txt"
 if %errorlevel%==1 goto jnativehook
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\v2.txt) do set voidtime=%%L
 del /f /Q "%temp%\v2.txt"
+cls
+echo.
+echo.
+echo.
+echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
+echo.
+echo.
+echo.
+echo.
+echo                                             25
+echo                                    %g%%g2%.....%r%%r2%...............%t%%w%
 find "WMIC.EXE-" < "%temp%\usn.txt" >%temp%\void.txt
 if %errorlevel%==1 goto jnativehook
 if %errorlevel%==0 findstr /v /c:"Data extend" "%temp%\void.txt" | findstr /v /c:"Security change" | findstr /v /c:"File delete" | findstr /v /c:"File create" >> "%temp%\v2.txt"
@@ -341,13 +377,20 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
-echo                                %g%%g2%......%r%%r2%..............%t%%w%
+echo                                             30
+echo                                    %g%%g2%......%r%%r2%..............%t%%w%
 if %errorlevel%==1 goto strings
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\jna.txt) do set jnativetime=%%L
 echo A JNativeHook was deleted at: %jnativetime%
@@ -370,17 +413,25 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             35
 echo                                    %g%%g2%.......%r%%r2%.............%t%%w%
 curl -s https://cdn.discordapp.com/attachments/876545074387910726/881681561685205042/strings2.exe > %temp%\dumper.exe
 if not exist "%temp%\dumper.exe" echo an error has fartcured & timeout /t 3 /nobreak >nul & exit /b
 tasklist /svc | find "svchost.exe" > %temp%\svchost.txt
 find "Pca" < "%temp%\svchost.txt" > %temp%\pcasvc.txt
+if %errorlevel%==1 find "AudioEndpointBuilder" < "%temp%\svchost.txt" > %temp%\pcasvc.txt
 if %errorlevel%==1 echo PcaSvc not Found, this might limit detections. & pause
 FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\pcasvc.txt) do set pcasvc=%%H 
 del /f /q "%temp%\pcasvc.txt"
@@ -397,56 +448,87 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             40
 echo                                    %g%%g2%........%g%%g2%............%t%%w%
-dumper.exe -pid %pcasvc% -l 4 > %temp%\pcasvc.txt
+dumper.exe -nh -pid %pcasvc% -l 4 > %temp%\pcasvc.txt
 cls
 echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             45
 echo                                    %g%%g2%.........%r%%r2%...........%t%%w%
-dumper.exe -pid %diagtrack% -l 4 > %temp%\diagtrack.txt
+dumper.exe -nh -pid %diagtrack% -l 4 > %temp%\diagtrack.txt
 cls
 echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             50
 echo                                    %g%%g2%..........%r%%r2%..........%t%%w%
-dumper.exe -pid %javaw% -l 4 > %temp%\javaw.txt
+tasklist /v | find "javaw" | find "Lunar"
+if %errorlevel%==1 dumper.exe -nh -pid %javaw% -l 4 > %temp%\javaw.txt 
+if %errorlevel%==0 set lun=true & goto lun
+:lun
 cls
 echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             75
 echo                                    %g%%g2%...............%r%%r2%.....%t%%w%
-
 find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
 findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
 if %errorlevel%==0 FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\pref2.txt) do set mgexe=%%H
+if %errorlevel%==1 goto fstrings
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\pref2.txt) do set sdtime=%%L 
 del /f /q "%temp%\pref2.txt" >nul
 
@@ -455,7 +537,7 @@ find "REG.EXE-" < "%temp%\pref.txt" >%temp%\ustestm.txt
 del /f /q "%temp%\pref.txt" >nul
 findstr /v /c:"Data extend" "%temp%\ustestm.txt" >> "%temp%\ustestm2.txt"
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm2.txt) do set sdtime2=%%L 
-if %errorlevel%==0 goto mgc
+if %errorlevel%==0 (goto mgc) else (goto fstrings)
 
 
 :mgc
@@ -464,12 +546,19 @@ echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             80
 echo                                    %g%%g2%................%r%%r2%....%t%%w%
 del /f /q "%temp%\ustestm.txt" >nul
 del /f /q "%temp%\ustestm2.txt" >nul
@@ -479,14 +568,35 @@ if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at
 
 
 :fstrings
-findstr /b /C:"lunar/dE/IlIlIIIlllIlIlIIlllllllllB" "%temp%\javaw.txt" >nul
-if %errorlevel%==0 set lunar=true
 
-findstr /i /b /C:"Auto Clicker" "%temp%\javaw.txt" >nul
+if %lun%==true goto pcasvc
+
+findstr /i /b /C:"AutoClicker.java" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic A>>"%temp%\detected.txt" & set detected=true
 
+findstr /i /b /C:"SelfDestruct.java" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Java Self Destruct>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /b /C:"Reach.java" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Cheat R>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /b /C:"AimAssist.java" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Java Self Destruct>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /C:"Velocity.java" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Cheat V>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /C:"(DDF)Lnet/minecraft/util/MovingObjectPosition;" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Cheat M>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /b /C:")()Lnet/minecraft/entity/EntityLivingBase;" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Cheat E>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /b /C:"AntiBot.java" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Cheat AB>>"%temp%\detected.txt" & set detected=true
+
 findstr /b /C:"Secondary finalizer" "%temp%\javaw.txt" >nul
-if %errorlevel%==0 goto GenericSD
+if %errorlevel%==0 echo Found Generic Self Destruct>>"%temp%\detected.txt" & set detected=true
 
 findstr /c:".jar!/trumpclientftw_bape_ggbP.class" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Bape (Cracked Vape)>>"%temp%\detected.txt" & set detected=true
@@ -496,6 +606,9 @@ if %errorlevel%==0 echo Found Ghostsense>>"%temp%\detected.txt" & set detected=t
 
 findstr /c:".jar!/Hamdulilha/" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Lowkey>>"%temp%\detected.txt" & set detected=true
+
+findstr /c:"https://workupload.com/file/8Q62F4d" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Lowkey>>"%temp%\detected.txt" & set detected=true
  
 findstr /b "skilleddablol" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Skilled>>"%temp%\detected.txt" & set detected=true
@@ -503,43 +616,62 @@ if %errorlevel%==0 echo Found Skilled>>"%temp%\detected.txt" & set detected=true
 findstr /i /c:"/keystrokesmod/ah$DM.class" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Raven>>"%temp%\detected.txt" & set detected=true
 
+findstr /i /c:"keystrokesmod/module/modules/combat/" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Raven>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /c:".jar!/a/am$b.class" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Crystal Client>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /c:"xyz/gucciclient/gui/ClickGUI.classUT" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found gucci Client>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /c:"Loading Onyc Client." "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found onyc Client>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /c:".jar!/io/fishermen/fpsdisplay/settings/Wool.class" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found sumoclient>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /c:".jar!/net/kohi/tcpnodelaymod/aUx.classB1." "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found vea client>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /c:"keystrokesmod/main/Ravenbplus.classUT" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Raven B+>>"%temp%\detected.txt" & set detected=true
+
 :continue
 
 findstr /b "(DDDDLjava/awt/color;)V" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Vape V4>>"%temp%\detected.txt" & set detected=true
 
+:pcasvc
 cls
 echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             85
 echo                                    %g%%g2%.................%r%%r2%...%t%%w%
-
-:pcasvc
 
 findstr /b "0000ceea51f8440281c20c0ac8a03ae02e95c173ee84" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Air Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000658c84c61a0df84027fe32e02a9c0b1e900000000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Axenta Clicker>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x00000000000C7600" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Axenta Clicker V2 (1)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0xbd7cba1c" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Axenta Clicker V2 (2)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "000000cc4b2f6ba90bf6fa96c0a72ad200eef3f9d12d" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found BhopMC Clicker(1)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0006bc39c3f8143dbeff6864366a802be50500000000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found BhopMC Clicker>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x00000000000D2800" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Boris Clicker>>"%temp%\detected.txt" & set detected=true
@@ -550,12 +682,12 @@ if %errorlevel%==0 echo Found Client Loader>>"%temp%\detected.txt" & set detecte
 
 findstr /b "0x19ac000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Cracked Crypt>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "00006f93f72e4b4b1219e0fe9b18192fd67b43666460" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Encephalon>>"%temp%\detected.txt" & set detected=true
  
 findstr /b "0x00000000004D9400" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Encephalon>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "00007729225027bc2e541730844706671af4f92f537a" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Epic Clicker>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0006ecfb83cbfb17d534d572dfbda503e2da0000ffff" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Epic External>>"%temp%\detected.txt" & set detected=true
@@ -563,8 +695,20 @@ if %errorlevel%==0 echo Found Epic External>>"%temp%\detected.txt" & set detecte
 findstr /b "0000ed6212e71335f3707303da91c84993c149520d01" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Epic External>>"%temp%\detected.txt" & set detected=true
 
+findstr /b "0x8356b" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Glock Clicker>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x130000" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Glock Clicker>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x2f6e3d1e" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Glock Clicker>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x000000000008356B" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Glock Clicker>>"%temp%\detected.txt" & set detected=true
+
 findstr /b "000072a0261e826a498eba2acf10b5b49400c5657f53" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Glock Clicker Crack>"%temp%\detected.txt" & set detected=true
+if %errorlevel%==0 echo Found Glock Clicker Crack>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "000637aa5385f0e2f927e4ea540422e5224900000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Glock Clicker Cracked>>"%temp%\detected.txt" & set detected=true
@@ -578,8 +722,11 @@ if %errorlevel%==0 echo Found Hermotet>>"%temp%\detected.txt" & set detected=tru
 findstr /b "0x00000000000A0E00" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Hyper Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0000cc666a1ffe5984bf91082f2f09d4c8c202347ea2" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Hyper Clicker>>"%temp%\detected.txt" & set detected=true
+findstr /b "0x00000000000F5400" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Hypnotic>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0000342407772a18dc071a556945c071888ab3273e09" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Hypnotic>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x000000000006B800" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Itami>>"%temp%\detected.txt" & set detected=true
@@ -615,16 +762,13 @@ findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\pcasvc.txt" >n
 if %errorlevel%==0 echo Found Mango Lite>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "00066c65787f14c3e9200e0c7a54b343a2b100000000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mangoo Lite>>"%temp%\detected.txt" & set detected=true
+if %errorlevel%==0 echo Found Mango Lite>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0006e1e8596a5009096d3041f00930c2dff50000ffff" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Nova Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000639a5f0816c6b9268e951750094e763fe00000000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Peach Clicker>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0000f136e2be3d29c97c29c54d2d4b4225477cdb2669" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Slinkware>>"%temp%\detected.txt" & set detected=true
+findstr /b "0x00000000000D303D" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found OP AutoClicker>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0006966215a9cce0d8555692dc19b932389400000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detected=true
@@ -632,23 +776,26 @@ if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detec
 findstr /b "00002d1772f38cfe4bbcdec8f055a44cb17bf3702081" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "000671877ff7d96b7584206a5bb10417fcd00000ffff" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Zoomin>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "00006ecc49dd6ea7b641a641f5f9a260483a21fd6350" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Zoomin>>"%temp%\detected.txt" & set detected=true
 
 cls
 echo.
 echo.
 echo.
 echo.
+echo %c%          __      __              _         _____ _____   _______          _ 
+echo           \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo            \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo             \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo              \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo               \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                        __/ ^| __/ ^|                                           
+echo                       ^|___/ ^|___/    
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
+echo                                             90
 echo                                    %g%%g2%..................%r%%r2%..%t%%w%
 
 :diagtrack
@@ -675,7 +822,7 @@ echo Clean
 <"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
 echo Alts:
 type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-timeout /t 10 /nobreak >nul 
+pause
 exit
 
 
@@ -686,16 +833,13 @@ type "%temp%\detected.txt"
 <"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
 echo Alts:
 type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-timeout /t 10 /nobreak >nul 
+pause
 exit
 
 
-:GenericSD
-cls
-if %lunar%==true goto continue
-echo Found Generic Self Destruct>>"%temp%\detected.txt" 
-set detected=true
-goto continue
+
+
+
 
 
 
@@ -709,7 +853,7 @@ echo Generic L found
 <"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
 echo Alts:
 type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-timeout /t 10 /nobreak >nul & exit
+pause
 
 
 
