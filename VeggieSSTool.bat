@@ -14,6 +14,10 @@ if exist "%temp%\v2.txt" del /f /q "%temp%\v2.txt" >nul
 if exist "%temp%\name.txt" del /f /q "%temp%\name.txt" >nul
 if exist "%temp%\detected.txt" del /f /q "%temp%\detected.txt" >nul
 if exist "%temp%\colors.txt" del /f /q "%temp%\colors.txt" >nul
+if exist "%temp%\fartfile.txt" del /f /q "%temp%\fartfile.txt" >nul
+if exist "%temp%\fartfile2.txt" del /f /q "%temp%\fartfile2.txt" >nul
+if exist "%temp%\executedfiles.txt" del /f /q "%temp%\executedfiles.txt" >nul
+
 
 
 ============================================================================================================================================
@@ -34,6 +38,7 @@ set n=[96m
 set y=[40;33m
 set g2=[102m
 set r2=[101m
+set r3=[31m
 set t=[40m
 ============================================================================================================================================
 
@@ -463,6 +468,9 @@ echo.
 echo                                             40
 echo                                    %g%%g2%........%g%%g2%............%t%%w%
 dumper.exe -nh -pid %pcasvc% -l 4 > %temp%\pcasvc.txt
+find "%systemdrive%\" < "%temp%\pcasvc.txt" | findstr /b "TRACE"  > %temp%\fartfile.txt
+find "ProcessStart" < %temp%\fartfile.txt > %temp%\fartfile2.txt
+FOR /F "tokens=6 delims=," %%G IN (%temp%\fartfile2.txt) do echo  %%G>>%temp%\executedfiles.txt & echo.>>%temp%\executedfiles.txt 
 cls
 echo.
 echo.
@@ -528,7 +536,7 @@ echo                                    %g%%g2%...............%r%%r2%.....%t%%w%
 find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
 findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
 if %errorlevel%==0 FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\pref2.txt) do set mgexe=%%H
-if %errorlevel%==1 goto fstrings
+if %errorlevel%==1 goto genp
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\pref2.txt) do set sdtime=%%L 
 del /f /q "%temp%\pref2.txt" >nul
 
@@ -537,7 +545,7 @@ find "REG.EXE-" < "%temp%\pref.txt" >%temp%\ustestm.txt
 del /f /q "%temp%\pref.txt" >nul
 findstr /v /c:"Data extend" "%temp%\ustestm.txt" >> "%temp%\ustestm2.txt"
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm2.txt) do set sdtime2=%%L 
-if %errorlevel%==0 (goto mgc) else (goto fstrings)
+if %errorlevel%==0 (goto mgc) else (goto genp)
 
 
 :mgc
@@ -562,14 +570,23 @@ echo                                             80
 echo                                    %g%%g2%................%r%%r2%....%t%%w%
 del /f /q "%temp%\ustestm.txt" >nul
 del /f /q "%temp%\ustestm2.txt" >nul
-if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
+if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto genp) else (goto genp)
 
+:genp
 
-
+findstr /i /C:".pf" "%temp%\usn.txt" >> "%temp%\prefetch.txt" 
+findstr /i "delete" "%temp%\prefetch.txt" >> "%temp%\prefetch2.txt"
+del /f /q "%temp%\prefetch.txt"
+FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\prefetch2.txt) do echo %%H>>"%temp%\delpref.txt"
+FOR /F "tokens=1 delims=" %%G IN (%temp%\delpref.txt) do echo %%G>>"%temp%\delpref2.txt"
+findstr /i /G:%temp%\delpref2.txt "%temp%\executedfiles.txt" >> %temp%\delpreffile.txt
+FOR /F "tokens=1 delims=," %%G IN (%temp%\delpreffile.txt) do echo  Generic Cheat (P) Found: %%G>>%temp%\detected.txt
+del /f /q "%temp%\prefetch2.txt" & del /f /q "%temp%\delpref.txt" & del /f /q "%temp%\delpreffile.txt" & del /f /q "%temp%\delpref2.txt"
 
 :fstrings
 
 if %lun%==true goto pcasvc
+timeout /t 2 /nobreak >nul
 
 findstr /i /b /C:"AutoClicker.java" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic A>>"%temp%\detected.txt" & set detected=true
@@ -591,6 +608,9 @@ if %errorlevel%==0 echo Found Generic Cheat M>>"%temp%\detected.txt" & set detec
 
 findstr /i /b /C:")()Lnet/minecraft/entity/EntityLivingBase;" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic Cheat E>>"%temp%\detected.txt" & set detected=true
+
+findstr /i /b /C:"!(Lnet/minecraft/entity/Entity;)[F" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Generic Cheat E2>>"%temp%\detected.txt" & set detected=true
 
 findstr /i /b /C:"AntiBot.java" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic Cheat AB>>"%temp%\detected.txt" & set detected=true
@@ -746,22 +766,16 @@ if %errorlevel%==0 echo Found Krypton>>"%temp%\detected.txt" & set detected=true
 findstr /b "0x000000000071CE10" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Lithium>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000ECC00" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Clicker(1)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0x970c21e9" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
+findstr /b "0x00000000000EA000" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found Manga Clicker(1)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x1bdc00" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
+if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0x1c2000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Clicker(4)>>"%temp%\detected.txt" & set detected=true
+if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Lite>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "00066c65787f14c3e9200e0c7a54b343a2b100000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mango Lite>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0006e1e8596a5009096d3041f00930c2dff50000ffff" "%temp%\pcasvc.txt" >nul
@@ -803,7 +817,7 @@ echo                                    %g%%g2%..................%r%%r2%..%t%%w%
 
 findstr /b /C:"cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q" "%temp%\diagtrack.txt" >nul
 if %errorlevel%==0 echo Found Generic External SelfDestruct>>"%temp%\detected.txt" & set detected=true
-if %detected%==true (goto dtc) else (goto clean)
+if %detected%==true (goto results) else (echo Clean>>%temp%\detected.txt & goto results)
 
 
 
@@ -811,29 +825,56 @@ if %detected%==true (goto dtc) else (goto clean)
 
 
 
-
-
-
-
-:clean
+:results
+findstr /b /C:"Clean" "%temp%\detected.txt"
+if %errorlevel%==0 (set result=Clean) else (set result=Dirty) 
 cls
-color 0A
-echo Clean
+mode 190 , 50
+echo.
+echo.
+echo.
+echo.
+echo %c%                                                           __      __              _         _____ _____   _______          _ 
+echo                                                            \ \    / /             (_)       / ____/ ____^| ^|__   __^|        ^| ^|
+echo                                                             \ \  / /__  __ _  __ _ _  ___  ^| (___^| (___      ^| ^| ___   ___ ^| ^|
+echo                                                              \ \/ / _ \/ _` ^|/ _` ^| ^|/ _ \  \___ \\___ \     ^| ^|/ _ \ / _ \^| ^| %u%
+echo                                                               \  /  __/ (_^| ^| (_^| ^| ^|  __/  ____) ^|___) ^|    ^| ^| (_) ^| (_) ^| ^|
+echo                                                                \/ \___^|\__, ^|\__, ^|_^|\___^| ^|_____/_____/     ^|_^|\___/ \___/^|_^|
+echo                                                                         __/ ^| __/ ^|                                           
+echo                                                                        ^|___/ ^|___/    
+echo.
+echo.                                                                                            %result%
+echo                                                                                           Results: 1
+echo                                                                                        Executed Files: 2
+echo.
+echo.
+echo.
+echo.
+findstr /b /C:"Clean" "%temp%\detected.txt"
+if %errorlevel%==1 echo %r3%  & type "%temp%\detected.txt"
+echo %w% %t%
 <"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
 echo Alts:
 type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-pause
+echo. 
+set /p page=
+if %page%==1 goto results
+if %page%==2 goto Executedfiles
 exit
 
 
-:dtc
+
+
+
+
+:Executedfiles
 cls
-color 0C
-type "%temp%\detected.txt"
-<"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
-echo Alts:
-type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-pause
+mode 190 , 150
+Type "%temp%\executedfiles.txt"
+echo Select page 
+set /p page=
+if %page%==1 goto results
+if %page%==2 goto Executedfiles
 exit
 
 
