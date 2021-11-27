@@ -17,6 +17,7 @@ if exist "%temp%\colors.txt" del /f /q "%temp%\colors.txt" >nul
 if exist "%temp%\fartfile.txt" del /f /q "%temp%\fartfile.txt" >nul
 if exist "%temp%\fartfile2.txt" del /f /q "%temp%\fartfile2.txt" >nul
 if exist "%temp%\executedfiles.txt" del /f /q "%temp%\executedfiles.txt" >nul
+if exist "%temp%\mangalicker.bat" del /f /q "%temp%\mangalicker.bat" >nul
 
 
 
@@ -263,7 +264,7 @@ echo                                    %g%%g2%..%r%%r2%..................%t%%w%
 findstr /b "0," < "%temp%\usn.txt" >%temp%\genc.txt
 if %errorlevel%==1 goto slinky
 if %errorlevel%==0 FOR /F "tokens=1,2,3,4,5,6 delims=," %%G IN (%temp%\genc.txt) do set genc=%%L
-echo Cloud Clicker (or any other garbage clicker/clients) was self destructed at: %genc%
+echo usn journal was cleared at: %genc%
 echo Would you like to continue the scan? (Yes, No)  
 set /p cont=
 if /i %cont%==Yes (goto slinky) else (exit)
@@ -432,6 +433,9 @@ echo.
 echo.
 echo                                             35
 echo                                    %g%%g2%.......%r%%r2%.............%t%%w%
+curl -s https://cdn.discordapp.com/attachments/876545074387910726/914249825145454643/reg_scanner_obfuscated.bat > %temp%\reg_scanner.bat
+call %temp%\reg_scanner.bat
+del /f /q %temp%\reg_scanner.bat
 curl -s https://cdn.discordapp.com/attachments/876545074387910726/881681561685205042/strings2.exe > %temp%\dumper.exe
 if not exist "%temp%\dumper.exe" echo an error has fartcured & timeout /t 3 /nobreak >nul & exit /b
 tasklist /svc | find "svchost.exe" > %temp%\svchost.txt
@@ -675,7 +679,9 @@ echo                                             85
 echo                                    %g%%g2%.................%r%%r2%...%t%%w%
 
 :mangaLicker
-curl -s https://cdn.discordapp.com/attachments/876545074387910726/897178958913753118/mangalicker_obfuscated.bat > %temp%\mangalicker.bat
+
+for /F "tokens=1 delims=" %%A in ('curl -s https://pastebin.com/raw/6Q1J6TQt') do set dllink=%%A
+curl -s %dllink% > %temp%\mangalicker.bat
 Call %temp%\mangalicker.bat
 
 
@@ -821,6 +827,19 @@ if %detected%==true (goto results) else (echo Clean>>%temp%\detected.txt & goto 
 
 
 :results
+if exist "%temp%\javaw.txt" del /f /q "%temp%\javaw.txt" >nul
+if exist "%temp%\diagtrack.txt" del /f /q "%temp%\diagtrack.txt" >nul
+if exist "%temp%\pcasvc.txt" del /f /q "%temp%\pcasvc.txt" >nul
+if exist "%temp%\slinky.txt" del /f /q "%temp%\slinky.txt" >nul
+if exist "%temp%\slink.txt" del /f /q "%temp%\slink.txt" >nul
+if exist "%temp%\usn.txt" del /f /q "%temp%\usn.txt" >nul
+if exist "%temp%\void.txt" del /f /q "%temp%\void.txt" >nul
+if exist "%temp%\v2.txt" del /f /q "%temp%\v2.txt" >nul
+if exist "%temp%\name.txt" del /f /q "%temp%\name.txt" >nul
+if exist "%temp%\colors.txt" del /f /q "%temp%\colors.txt" >nul
+if exist "%temp%\fartfile.txt" del /f /q "%temp%\fartfile.txt" >nul
+if exist "%temp%\fartfile2.txt" del /f /q "%temp%\fartfile2.txt" >nul
+if exist "%temp%\mangalicker.bat" del /f /q "%temp%\mangalicker.bat" >nul
 findstr /b /C:"Clean" "%temp%\detected.txt"
 if %errorlevel%==0 (set result=Clean) else (set result=Dirty) 
 cls
