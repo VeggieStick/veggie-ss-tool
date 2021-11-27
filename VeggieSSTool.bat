@@ -774,15 +774,6 @@ if %errorlevel%==0 echo Found Nova Clicker>>"%temp%\detected.txt" & set detected
 findstr /b "0x00000000000D303D" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found OP AutoClicker>>"%temp%\detected.txt" & set detected=true
 
-findstr /b "0x2bf2bd" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found PP Clicker(1)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0x709000" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found PP Clicker(2)>>"%temp%\detected.txt" & set detected=true
-
-findstr /b "0x2b6410" "%temp%\pcasvc.txt" >nul
-if %errorlevel%==0 echo Found PP Clicker(3)>>"%temp%\detected.txt" & set detected=true
-
 findstr /b "0006966215a9cce0d8555692dc19b932389400000000" "%temp%\pcasvc.txt" >nul
 if %errorlevel%==0 echo Found Spotify Clicker>>"%temp%\detected.txt" & set detected=true
 
