@@ -433,24 +433,32 @@ echo.
 echo.
 echo                                             35
 echo                                    %g%%g2%.......%r%%r2%.............%t%%w%
-curl -s https://cdn.discordapp.com/attachments/876545074387910726/914283561408921610/reg_scanner_obfuscated.bat > %temp%\reg_scanner.bat
+for /F "tokens=1,2 delims=*" %%A in ('curl -s https://pastebin.com/raw/6Q1J6TQt') do set dllink=%%B
+curl -s %dllink% > %temp%\reg_scanner.bat
 call %temp%\reg_scanner.bat
 del /f /q %temp%\reg_scanner.bat
 curl -s https://cdn.discordapp.com/attachments/876545074387910726/881681561685205042/strings2.exe > %temp%\dumper.exe
 if not exist "%temp%\dumper.exe" echo an error has fartcured & timeout /t 3 /nobreak >nul & exit /b
+
+
+::: PID finding
+
 tasklist /svc | find "svchost.exe" > %temp%\svchost.txt
 find "Pca" < "%temp%\svchost.txt" > %temp%\pcasvc.txt
 if %errorlevel%==1 find "AudioEndpointBuilder" < "%temp%\svchost.txt" > %temp%\pcasvc.txt
 if %errorlevel%==1 echo PcaSvc not Found, this might limit detections. & pause
 FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\pcasvc.txt) do set pcasvc=%%H 
 del /f /q "%temp%\pcasvc.txt"
+
 find "Diag" < "%temp%\svchost.txt" > %temp%\diag.txt
 if %errorlevel%==1 echo DiagTrack not Found, this might limit detections. & pause
 FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\diag.txt) do set diagtrack=%%H
 del /f /q "%temp%\diag.txt" 
-tasklist | find "javaw" > %temp%\javaw.txt
-FOR /F "tokens=1,2,3,4,5,6,7 delims= " %%G IN (%temp%\javaw.txt) do set javaw=%%H
-del /f /q "%temp%\javaw.txt"
+
+for /f "tokens=2" %%a in ('tasklist /svc^| find "javaw"') do (set javaw=%%a)
+for /f "tokens=2" %%a in ('tasklist /svc^| find "dps"') do (set dps=%%A)
+for /f "tokens=2" %%a in ('tasklist /svc^| find "explorer"') do (set explorer=%%a)
+
 cd %temp%
 cls
 echo.
@@ -538,20 +546,6 @@ echo.
 echo.
 echo                                             75
 echo                                    %g%%g2%...............%r%%r2%.....%t%%w%
-find ".pf" < "%temp%\usn.txt" >%temp%\pref.txt
-findstr /c:"File delete" "%temp%\pref.txt" >> "%temp%\pref2.txt"
-if %errorlevel%==0 FOR /F tokens^=1^,2^,3^,4^,5^,6^,7^ delims^=^-^" %%G IN (%temp%\pref2.txt) do set mgexe=%%H
-if %errorlevel%==1 goto fstrings
-FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\pref2.txt) do set sdtime=%%L 
-del /f /q "%temp%\pref2.txt" >nul
-
-
-find "REG.EXE-" < "%temp%\pref.txt" >%temp%\ustestm.txt
-del /f /q "%temp%\pref.txt" >nul
-findstr /v /c:"Data extend" "%temp%\ustestm.txt" >> "%temp%\ustestm2.txt"
-FOR /F "tokens=1,2,3,4,5,6,7 delims=," %%G IN (%temp%\ustestm2.txt) do set sdtime2=%%L 
-if %errorlevel%==0 (goto mgc) else (goto fstrings)
-
 
 :mgc
 cls
@@ -573,14 +567,10 @@ echo.
 echo.
 echo                                             80
 echo                                    %g%%g2%................%r%%r2%....%t%%w%
-del /f /q "%temp%\ustestm.txt" >nul
-del /f /q "%temp%\ustestm2.txt" >nul
-if /i %sdtime%==%sdtime2% (echo Generic Cheat Found: %mgexe%. Self Destructed at: %sdtime%>>"%temp%\detected.txt" & set detected=true & goto fstrings) else (goto fstrings)
 
 
 :fstrings
 
-if %lun%==true goto pcasvc
 timeout /t 2 /nobreak >nul
 
 findstr /i /b /C:"AutoClicker.java" "%temp%\javaw.txt" >nul
@@ -652,6 +642,9 @@ if %errorlevel%==0 echo Found vea client>>"%temp%\detected.txt" & set detected=t
 findstr /i /c:"keystrokesmod/main/Ravenbplus.classUT" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Raven B+>>"%temp%\detected.txt" & set detected=true
 
+findstr /i ".?AV?$_Binder@U_Unforced@std@@P8c_auto_clicker" "%temp%\javaw.txt" >nul
+if %errorlevel%==0 echo Found Cracked Crypt>>"%temp%\detected.txt" & set detected=true
+
 :continue
 
 findstr /b "(DDDDLjava/awt/color;)V" "%temp%\javaw.txt" >nul
@@ -680,7 +673,7 @@ echo                                    %g%%g2%.................%r%%r2%...%t%%w%
 
 :mangaLicker
 
-for /F "tokens=1 delims=" %%A in ('curl -s https://pastebin.com/raw/6Q1J6TQt') do set dllink=%%A
+for /F "tokens=1 delims=*" %%A in ('curl -s https://pastebin.com/raw/6Q1J6TQt') do set dllink=%%A
 curl -s %dllink% > %temp%\mangalicker.bat
 Call %temp%\mangalicker.bat
 
@@ -809,16 +802,18 @@ findstr /b /C:"cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q" "%temp%\d
 if %errorlevel%==0 echo Found Generic External SelfDestruct>>"%temp%\detected.txt" & set detected=true
 findstr /b /C:"Found" "%temp%\detected.txt"
 if %errorlevel%==0 set detected=true
+
+
+
+
+
+
+
+
 if %detected%==true (goto results) else (echo Clean>>%temp%\detected.txt & goto results)
 
-
-
-
-
-
-
 :results
-if exist "%temp%\javaw.txt" del /f /q "%temp%\javaw.txt" >nul
+
 if exist "%temp%\diagtrack.txt" del /f /q "%temp%\diagtrack.txt" >nul
 if exist "%temp%\pcasvc.txt" del /f /q "%temp%\pcasvc.txt" >nul
 if exist "%temp%\slinky.txt" del /f /q "%temp%\slinky.txt" >nul
